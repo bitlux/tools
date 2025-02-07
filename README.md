@@ -1,6 +1,10 @@
 # tools
 Various tools, mostly for Linux
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/bitlux/tools.svg)](https://pkg.go.dev/github.com/bitlux/tools)
+[![Lint Status](https://github.com/bitlux/tools/workflows/golangci-lint/badge.svg)](https://github.com/bitlux/tools/actions?query=workflow%3Agolangci-lint)
+[![Go Report Card](https://goreportcard.com/badge/github.com/bitlux/tools)](https://goreportcard.com/report/github.com/bitlux/tools)
+
 ## autotmux
 
 `autotmux` will attach to an existing tmux session, if there is exactly one. If there is more than one,
