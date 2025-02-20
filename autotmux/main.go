@@ -10,6 +10,7 @@ import (
 
 const (
 	kNotRunning = "no server running"
+	kNoSuchFile = "No such file or directory"
 )
 
 func must(err error) {
@@ -21,12 +22,16 @@ func must(err error) {
 }
 
 func main() {
+	if os.Getenv("TMUX") != "" {
+		return
+	}
+
 	path, err := exec.LookPath("tmux")
 	must(err)
 
 	out, err := exec.Command(path, "ls").CombinedOutput()
 	sessions := strings.TrimSpace(string(out))
-	if strings.HasPrefix(sessions, kNotRunning) {
+	if strings.Contains(sessions, kNoSuchFile) || strings.HasPrefix(sessions, kNotRunning) {
 		return
 	}
 
