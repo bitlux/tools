@@ -6,6 +6,8 @@ import (
 	"os/exec"
 	"strings"
 	"syscall"
+
+	"github.com/fatih/color"
 )
 
 const (
@@ -34,13 +36,10 @@ func main() {
 	if strings.Contains(sessions, kNoSuchFile) || strings.HasPrefix(sessions, kNotRunning) {
 		return
 	}
-
 	must(err)
+	color.Green(sessions)
 
-	lines := strings.Split(sessions, "\n")
-	if n := len(lines); n > 1 {
-		fmt.Println("found", n, "tmux sessions")
-		return
+	if len(os.Args) > 1 && os.Args[1] == "-a" {
+		must(syscall.Exec(path, []string{path, "attach"}, os.Environ()))
 	}
-	must(syscall.Exec(path, []string{"attach"}, os.Environ()))
 }
